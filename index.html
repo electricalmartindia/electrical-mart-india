@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrical Mart India</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb;color:#17233b}
+header{background:#092653;color:white;text-align:center;padding:25px 10px}
+header h1{color:#ffb52e;margin:5px;font-size:27px}
+header p{margin:8px}
+nav{background:#164477;padding:15px;text-align:center}
+nav a{color:white;text-decoration:none;margin:0 10px;font-weight:bold}
+.hero{background:linear-gradient(120deg,#092653,#1765a5);color:white;text-align:center;padding:45px 15px}
+.hero h2{font-size:28px}
+.search{width:90%;max-width:450px;padding:14px;border:0;border-radius:7px}
+button{background:#ff9f00;color:white;border:0;padding:13px 22px;border-radius:6px;font-weight:bold}
+h2.section{text-align:center;margin-top:30px}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;padding:15px;max-width:900px;margin:auto}
+.card{background:white;border-radius:10px;padding:22px 8px;text-align:center;box-shadow:0 2px 8px #ddd}
+.icon{font-size:38px}
+.card h3{font-size:16px}
+.card p{font-size:13px;color:#666}
+.info{text-align:center;padding:25px;background:white;margin-top:20px}
+footer{background:#092653;color:white;text-align:center;padding:25px;margin-top:20px}
+@media(min-width:650px){
+.products{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>⚡ ELECTRICAL MART INDIA</h1>
+<p>One Nation – One Electrical Marketplace</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#products">Products</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+<h2>भारत का अपना Electrical Marketplace</h2>
+<p>Every Electrical Brand. Every Electrical Product. One Marketplace.</p>
+<input class="search" id="search" placeholder="Search Electrical Products">
+<br><br>
+<button onclick="searchProducts()">Search Products</button>
+</section>
+
+<h2 class="section" id="products">Our Product Categories</h2>
+
+<section class="products" id="productList">
+
+<div class="card"><div class="icon">⚡</div><h3>MCB & MCCB</h3><p>Electrical Protection</p></div>
+
+<div class="card"><div class="icon">🔌</div><h3>Switch & Socket</h3><p>Switchgear Products</p></div>
+
+<div class="card"><div class="icon">💡</div><h3>LED Lighting</h3><p>All Lighting Products</p></div>
+
+<div class="card"><div class="icon">⚙️</div><h3>Electric Motors</h3><p>Motors & Drives</p></div>
+
+<div class="card"><div class="icon">🔋</div><h3>Battery & Solar</h3><p>Solar Products</p></div>
+
+<div class="card"><div class="icon">🔧</div><h3>Electrical Tools</h3><p>Tools & Accessories</p></div>
+
+<div class="card"><div class="icon">🔗</div><h3>Cables & Wires</h3><p>Electrical Cables</p></div>
+
+<div class="card"><div class="icon">🛠️</div><h3>Electrical Panels</h3><p>Control Panels</p></div>
+
+<div class="card"><div class="icon">🔄</div><h3>Transformer</h3><p>Power Transformers</p></div>
+
+<div class="card"><div class="icon">🚿</div><h3>Water Pumps</h3><p>Submersible Pumps</p></div>
+
+<div class="card"><div class="icon">🎛️</div><h3>VFD & Automation</h3><p>Industrial Automation</p></div>
+
+<div class="card"><div class="icon">🦺</div><h3>Safety Products</h3><p>Electrical Safety</p></div>
+
+</section>
+
+<section class="info" id="about">
+<h2>About Us</h2>
+<p>Electrical Mart India एक ऐसा प्लेटफॉर्म है जहाँ सभी Electrical Brands और Products एक ही जगह मिलेंगे।</p>
+<p>Manufacturers | Distributors | Wholesalers | Retailers | Electricians | Customers</p>
+</section>
+
+<section class="info" id="contact">
+<h2>Contact Us</h2>
+<p>Electrical Mart India</p>
+<p>India's Electrical Marketplace</p>
+</section>
+
+<footer>
+<h3>⚡ ELECTRICAL MART INDIA</h3>
+<p>One Nation – One Electrical Marketplace</p>
+<p>© 2026 Electrical Mart India</p>
+</footer>
+
+<script>
+function searchProducts(){
+let value=document.getElementById("search").value.toLowerCase();
+let cards=document.querySelectorAll(".card");
+cards.forEach(function(card){
+card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
+});
+}
+</script>
+
+</body>
+                    </html>
