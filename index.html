@@ -545,3 +545,387 @@ function searchProducts(){
     'कुल मिले हुए Products: ' + filtered.length;
 
 }
+<div class="searchrow">
+  <div class="searchbox">
+    🔍
+    <input id="productSearch"
+      placeholder="MCB, Motor, Cable, Brand या Product Search करें..."
+      oninput="filterProducts()">
+  </div>
+
+  <button class="searchbtn" onclick="filterProducts()">
+    SEARCH
+  </button>
+</div>
+<div class="formgrid" style="margin-bottom:15px">
+  <div class="field">
+    <label>Brand Filter</label>
+    <select id="brandFilter" onchange="filterProducts()">
+      <option value="">All Brands</option>
+      <option>Havells</option>
+      <option>Polycab</option>
+      <option>Finolex</option>
+      <option>Schneider</option>
+      <option>ABB</option>
+      <option>Siemens</option>
+      <option>Legrand</option>
+      <option>Crompton</option>
+    </select>
+  </div>
+  
+
+  <div class="field">
+    <label>Sort Price</label>
+    <select id="priceSort" onchange="filterProducts()">
+      <option value="">Default</option>
+      <option value="low">Low to High</option>
+      <option value="high">High to Low</option>
+    </select>
+  </div>
+</div>
+
+<p id="productCount"></p>
+.prodimg {
+  height:150px;
+  background:#fff;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:55px;
+  border:1px solid #edf0f5;
+}
+
+.mrp {
+  color:#778;
+  text-decoration:line-through;
+  font-size:12px;
+}
+
+.saleprice {
+  color:#0b1f33;
+  font-size:19px;
+  font-weight:900;
+}
+
+.discount {
+  color:#13845d;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.whatsapp {
+  width:100%;
+  margin-top:7px;
+  background:#16a34a;
+  color:white;
+  border:0;
+  padding:10px;
+  border-radius:8px;
+  font-weight:bold;
+}
+const products = [
+{
+ icon:"🔌",
+ name:"FR PVC Copper Wire",
+ brand:"Polycab",
+ model:"1.5 SQ MM",
+ mrp:1600,
+ sale:1250
+},
+{
+ icon:"🎚️",
+ name:"DP MCB 32A",
+ brand:"Havells",
+ model:"32A C Curve",
+ mrp:850,
+ sale:620
+},
+{
+ icon:"🛡️",
+ name:"RCCB 40A 30mA",
+ brand:"Schneider",
+ model:"2 Pole",
+ mrp:1900,
+ sale:1450
+},
+{
+ icon:"⚙️",
+ name:"1 HP Single Phase Motor",
+ brand:"Crompton",
+ model:"1 HP 230V",
+ mrp:5500,
+ sale:4200
+},
+{
+ icon:"🚰",
+ name:"1 HP Submersible Pump",
+ brand:"Kirloskar",
+ model:"1 HP",
+ mrp:8500,
+ sale:6800
+},
+{
+ icon:"🧲",
+ name:"3 Pole Contactor 18A",
+ brand:"Siemens",
+ model:"18A",
+ mrp:1350,
+ sale:980
+},
+{
+ icon:"🔄",
+ name:"VFD 2 HP",
+ brand:"ABB",
+ model:"2 HP Drive",
+ mrp:11500,
+ sale:8900
+},
+{
+ icon:"💡",
+ name:"LED Flood Light 50W",
+ brand:"Crompton",
+ model:"50 Watt",
+ mrp:1200,
+ sale:890
+}
+];
+function productCard(p) {
+  let discount = Math.round(
+    (p.mrp-p.sale)/p.mrp*100
+  );
+
+  let message = encodeURIComponent(
+    "Namaste Electrical Mart India,\n" +
+    "Product: "+p.name+"\n" +
+    "Brand: "+p.brand+"\n" +
+    "Model: "+p.model+"\n" +
+    "Sale Price: ₹"+p.sale+"\n" +
+    "Please confirm availability."
+  );
+
+  return `
+  <article class="prod">
+    <div class="prodimg">${p.icon}</div>
+
+    <h3>${p.name}</h3>
+
+    <div class="spec">
+      Brand: ${p.brand}<br>
+      Model: ${p.model}
+    </div>
+
+    <div class="mrp">MRP: ₹${p.mrp}</div>
+
+    <div class="saleprice">
+      ₹${p.sale}
+    </div>
+
+    <div class="discount">
+      ${discount}% OFF
+    </div>
+
+    <button class="whatsapp"
+      onclick="window.open(
+      'https://wa.me/917050607711?text='+${JSON.stringify(message)},
+      '_blank')">
+      WhatsApp Order
+    </button>
+  </article>`;
+}
+
+function filterProducts() {
+  let search = document.getElementById("productSearch")?.value.toLowerCase() || "";
+  let brand = document.getElementById("brandFilter")?.value || "";
+  let sort = document.getElementById("priceSort")?.value || "";
+
+  let list = products.filter(p => {
+    let text = (p.name+" "+p.brand+" "+p.model).toLowerCase();
+
+    return text.includes(search) &&
+      (!brand || p.brand===brand);
+  });
+
+  if(sort==="low") list.sort((a,b)=>a.sale-b.sale);
+  if(sort==="high") list.sort((a,b)=>b.sale-a.sale);
+
+  let html = list.map(productCard).join("");
+
+  document.getElementById("allproducts").innerHTML =
+    html || "<p>No Product Found</p>";
+
+  document.getElementById("homeproducts").innerHTML =
+    list.slice(0,4).map(productCard).join("");
+
+  let count = document.getElementById("productCount");
+  if(count) count.textContent = list.length+" Products Found";
+}
+<section id="products" class="panel">
+  <section id="admin" class="panel">
+
+  <div class="sectionhead">
+    <div>
+      <h2>⚙️ Admin Dashboard</h2>
+      <p>Electrical Mart India Product Management</p>
+    </div>
+  </div>
+
+  <div class="calc-card">
+
+    <h3>➕ Add New Product</h3>
+
+    <div class="formgrid">
+
+      <div class="field">
+        <label>Product Name</label>
+        <input id="adminName" placeholder="MCB 32A">
+      </div>
+
+      <div class="field">
+        <label>Brand</label>
+        <input id="adminBrand" placeholder="Havells">
+      </div>
+
+      <div class="field">
+        <label>Model Number</label>
+        <input id="adminModel" placeholder="Model Number">
+      </div>
+
+      <div class="field">
+        <label>Category</label>
+        <input id="adminCategory" placeholder="MCB">
+      </div>
+
+      <div class="field">
+        <label>MRP ₹</label>
+        <input id="adminMrp" type="number">
+      </div>
+
+      <div class="field">
+        <label>Sale Price ₹</label>
+        <input id="adminSale" type="number">
+      </div>
+
+      <div class="field">
+        <label>Product Image URL</label>
+        <input id="adminImage" placeholder="Image link">
+      </div>
+
+    </div>
+
+    <div class="calc-actions">
+      <button class="primarycalc" onclick="adminAddProduct()">
+        SAVE PRODUCT
+      </button>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <h3>📦 Manage Products</h3>
+    <div id="adminProductList" class="listgrid"></div>
+  </div>
+
+  </section>
+  
+  <button class="topbtn" onclick="show('admin')">
+  ADMIN
+  </button>
+  // ELECTRICAL MART INDIA ADMIN DEMO
+
+let adminProducts = JSON.parse(
+  localStorage.getItem("emi_admin_products") || "[]"
+);
+
+function saveAdminProducts() {
+  localStorage.setItem(
+    "emi_admin_products",
+    JSON.stringify(adminProducts)
+  );
+}
+
+function adminAddProduct() {
+
+  const name = document.getElementById("adminName").value.trim();
+  const brand = document.getElementById("adminBrand").value.trim();
+  const model = document.getElementById("adminModel").value.trim();
+  const category = document.getElementById("adminCategory").value.trim();
+  const mrp = Number(document.getElementById("adminMrp").value);
+  const sale = Number(document.getElementById("adminSale").value);
+  const image = document.getElementById("adminImage").value.trim();
+
+  if (!name || !brand || !model || !category ||
+      !Number.isFinite(mrp) || !Number.isFinite(sale) ||
+      mrp <= 0 || sale <= 0 || sale > mrp) {
+    alert("सभी जानकारी सही भरें। Sale Price, MRP से अधिक नहीं होनी चाहिए।");
+    return;
+  }
+
+  adminProducts.push({
+    id: Date.now(),
+    name,
+    brand,
+    model,
+    category,
+    mrp,
+    sale,
+    image
+  });
+
+  saveAdminProducts();
+  renderAdminProducts();
+
+  alert("Product Demo में Save हो गया!");
+
+  document.querySelectorAll(
+    "#admin input"
+  ).forEach(input => input.value = "");
+
+}
+
+function renderAdminProducts() {
+
+  const box = document.getElementById("adminProductList");
+
+  if (!box) return;
+
+  box.innerHTML = adminProducts.map(p => `
+    <div class="listitem">
+      <b>${escapeAdminText(p.name)}</b>
+      <small>
+        ${escapeAdminText(p.brand)} |
+        ${escapeAdminText(p.model)}
+      </small>
+      <p>MRP: ₹${p.mrp}</p>
+      <b>Sale: ₹${p.sale}</b>
+      <button class="add"
+        onclick="adminDeleteProduct(${p.id})">
+        DELETE PRODUCT
+      </button>
+    </div>
+  `).join("") || "<p>अभी कोई नया Product नहीं है।</p>";
+}
+
+function escapeAdminText(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[ch]);
+}
+
+function adminDeleteProduct(id) {
+
+  if (!confirm("क्या आप यह Product Delete करना चाहते हैं?")) {
+    return;
+  }
+
+  adminProducts = adminProducts.filter(p => p.id !== id);
+
+  saveAdminProducts();
+  renderAdminProducts();
+}
+
+renderAdminProducts();
+
