@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrical Mart India</title>
+<style>
+body{margin:0;font-family:Arial;background:#f2f5fa;color:#17233b}
+header{background:#092653;color:white;padding:22px;text-align:center}
+header h1{margin:0;color:#ffb52e}
+nav{background:#123b70;padding:13px;text-align:center}
+nav a{color:white;text-decoration:none;margin:10px}
+.hero{padding:40px 15px;text-align:center;background:#dceaff}
+.hero h2{font-size:28px}
+.search{padding:12px;width:80%;max-width:400px;border:1px solid #aaa;border-radius:6px}
+button{background:#ff9f00;color:#fff;border:0;padding:12px 20px;border-radius:5px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:15px;padding:18px}
+.card{background:white;padding:18px;text-align:center;border-radius:10px;box-shadow:0 2px 8px #ddd}
+.icon{font-size:38px}
+.card h3{font-size:17px}
+footer{background:#092653;color:white;text-align:center;padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>⚡ ELECTRICAL MART INDIA</h1>
+<p>One Nation – One Electrical Marketplace</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#products">Products</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="hero">
+<h2>भारत का अपना Electrical Marketplace</h2>
+<p>Every Electrical Brand. Every Electrical Product. One Marketplace.</p>
+<input class="search" type="search" placeholder="Search Electrical Products">
+<br><br>
+<button onclick="alert('Shopping feature coming soon!')">Explore Products</button>
+</section>
+
+<h2 style="text-align:center">Our Products</h2>
+
+<section class="products" id="products">
+<div class="card"><div class="icon">⚡</div><h3>MCB & MCCB</h3></div>
+<div class="card"><div class="icon">🔌</div><h3>Switch & Socket</h3></div>
+<div class="card"><div class="icon">💡</div><h3>LED Lighting</h3></div>
+<div class="card"><div class="icon">⚙️</div><h3>Electric Motors</h3></div>
+<div class="card"><div class="icon">🔋</div><h3>Battery & Solar</h3></div>
+<div class="card"><div class="icon">🔧</div><h3>Electrical Tools</h3></div>
+<div class="card"><div class="icon">🔗</div><h3>Cables & Wires</h3></div>
+<div class="card"><div class="icon">🛠️</div><h3>Electrical Panels</h3></div>
+</section>
+
+<section id="about" style="padding:20px;text-align:center">
+<h2>About Electrical Mart India</h2>
+<p>एक ही प्लेटफॉर्म पर सभी Electrical Brands और Products.</p>
+</section>
+
+<footer id="contact">
+<h3>Electrical Mart India</h3>
+<p>Coming Soon – All India Electrical Marketplace</p>
+<p>© 2026 Electrical Mart India</p>
+</footer>
+
+</body>
+</html>
